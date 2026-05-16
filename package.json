@@ -18,7 +18,8 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "build:kb": "tsx scripts/build-kb.ts",
-    "prebuild": "npm run build:kb"
+    "prebuild": "npm run build:kb",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.39",
