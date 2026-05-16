@@ -41,7 +41,7 @@ export function Hero() {
     <section
       ref={containerRef}
       id="top"
-      className="relative min-h-screen px-6 md:px-10 pt-16 pb-24 flex flex-col justify-between overflow-hidden"
+      className="relative min-h-screen px-6 md:px-10 pt-16 pb-24 flex flex-col justify-center overflow-hidden"
       style={{
         background:
           "radial-gradient(900px 380px at 70% 18%, rgba(167,139,250,.20) 0%, transparent 60%), radial-gradient(700px 320px at 25% 75%, rgba(108,207,255,.20) 0%, transparent 60%), var(--color-bg)",
@@ -50,7 +50,6 @@ export function Hero() {
       <div className="absolute inset-0 z-0" aria-hidden>
         <NeuralField />
       </div>
-      <div className="relative z-10" />
       <div className="relative z-10 w-full">
         <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
           {site.role} · {site.org}
