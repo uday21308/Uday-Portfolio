@@ -50,7 +50,14 @@ export function useChatStream() {
         body: JSON.stringify({ message: text }),
         signal: ctl.signal,
       });
-      if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
+      if (!res.ok || !res.body) {
+        let detail = `http ${res.status}`;
+        try {
+          const body = await res.json();
+          if (body?.error) detail = `${body.error} (${res.status})`;
+        } catch {}
+        throw new Error(detail);
+      }
       const reader = res.body.getReader();
       const dec = new TextDecoder();
       let buffer = "";
@@ -76,7 +83,9 @@ export function useChatStream() {
         }
       }
     } catch (err) {
-      assistant = { ...assistant, content: assistant.content || "Sorry — something went wrong. Try again?" };
+      const msg = err instanceof Error ? err.message : "unknown error";
+      console.error("[useChatStream]", err);
+      assistant = { ...assistant, content: assistant.content || `Sorry — ${msg}. Try again?` };
     } finally {
       setMessages((m) => [...m, assistant]);
       setPendingAssistant(null);
