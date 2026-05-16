@@ -15,7 +15,8 @@ export function withItalicAccents(input: string): React.ReactNode {
     parts.push(
       <em
         key={key++}
-        className="font-[family-name:var(--font-serif)] not-italic font-normal text-[var(--color-accent)] tracking-[-0.005em]"
+        className="font-[family-name:var(--font-serif)] italic font-medium text-[var(--color-accent)]"
+        style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
       >
         {match[1]}
       </em>

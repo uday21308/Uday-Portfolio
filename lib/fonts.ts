@@ -1,7 +1,7 @@
 import {
   Big_Shoulders_Stencil,
   Big_Shoulders,
-  Italiana,
+  Fraunces,
   DM_Sans,
   Inter,
   JetBrains_Mono,
@@ -21,9 +21,11 @@ export const fontDisplayAlt = Big_Shoulders({
   display: "swap",
 });
 
-export const fontSerif = Italiana({
+export const fontSerif = Fraunces({
   subsets: ["latin"],
-  weight: "400",
+  style: ["italic"],
+  weight: "variable",
+  axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-serif",
   display: "swap",
 });
