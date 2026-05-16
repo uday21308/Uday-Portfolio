@@ -13,14 +13,15 @@ const paragraphs = [
 export function About() {
   return (
     <section id="about" className="px-6 md:px-10 py-16 md:py-20">
-      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-10 items-start max-w-5xl mx-auto">
-        <div className="w-[120px] h-[120px] rounded-full overflow-hidden border border-[var(--color-accent)]/20 bg-gradient-to-br from-[#1a1a2a] to-[var(--color-bg)]">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-8 md:gap-10 items-start max-w-5xl mx-auto">
+        <div className="w-[160px] h-[160px] rounded-full overflow-hidden">
           <Image
             src={site.profileImage}
             alt={site.name}
-            width={120}
-            height={120}
+            width={320}
+            height={320}
             className="w-full h-full object-cover"
+            priority
           />
         </div>
         <div>
