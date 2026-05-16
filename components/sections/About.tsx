@@ -2,7 +2,6 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
 import { Reveal } from "@/components/ui/Reveal";
-import { Waveform } from "@/components/ui/Waveform";
 
 const paragraphs = [
   "AI / ML Engineer at *Mindcres*, architecting a multilingual voice grievance bot for a state-government portal — 25-state conversation flow, 4 FastAPI microservices, 2,300+ Pytest cases at 90%+ coverage.",
@@ -33,7 +32,6 @@ export function About() {
               {withItalicAccents(p)}
             </p>
           ))}
-          <Waveform className="max-w-[620px]" />
         </div>
       </Reveal>
     </section>
