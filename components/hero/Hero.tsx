@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
-import { LineArtBot } from "@/components/ui/LineArtBot";
 import { ScrollCue } from "./ScrollCue";
 
 const NeuralField = dynamic(() => import("./NeuralField").then((m) => m.NeuralField), {
@@ -51,7 +50,6 @@ export function Hero() {
       <div className="absolute inset-0 z-0" aria-hidden>
         <NeuralField />
       </div>
-      <LineArtBot />
       <div className="relative z-10" />
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
