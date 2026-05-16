@@ -1,4 +1,5 @@
-import { Mail, ExternalLink, ArrowDown } from "lucide-react";
+import { Mail, ArrowDown } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
 
@@ -35,7 +36,7 @@ export function Contact() {
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs tracking-[0.16em] uppercase px-5 py-3 border border-[var(--color-accent)]/25 rounded-full hover:border-[var(--color-accent)] transition-colors"
         >
-          <ExternalLink size={14} /> LinkedIn
+          <FaLinkedin size={14} /> LinkedIn
         </a>
         <a
           href={site.links.github}
@@ -43,7 +44,7 @@ export function Contact() {
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs tracking-[0.16em] uppercase px-5 py-3 border border-[var(--color-accent)]/25 rounded-full hover:border-[var(--color-accent)] transition-colors"
         >
-          <ExternalLink size={14} /> GitHub
+          <FaGithub size={14} /> GitHub
         </a>
       </div>
     </section>

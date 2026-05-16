@@ -1,4 +1,5 @@
-import { GitFork, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
@@ -39,7 +40,7 @@ export function Projects() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--color-accent)] hover:opacity-80 transition-opacity"
                 >
-                  <GitFork size={12} /> View on GitHub <ArrowUpRight size={12} />
+                  <FaGithub size={12} /> View on GitHub <ArrowUpRight size={12} />
                 </a>
               ) : (
                 <span className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--color-fg-muted)]/60">
