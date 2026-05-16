@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { fontVariables } from "@/lib/fonts";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { AIProvider } from "@/components/providers/AIProvider";
 import { Cursor } from "@/components/ui/Cursor";
+import { UdayAI } from "@/components/ai/UdayAI";
+import { AutoGreet } from "@/components/ai/AutoGreet";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,7 +45,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={fontVariables}>
       <body>
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <AIProvider>
+            {children}
+            <UdayAI />
+            <AutoGreet delayMs={8000} />
+          </AIProvider>
+        </LenisProvider>
         <Cursor />
       </body>
     </html>
