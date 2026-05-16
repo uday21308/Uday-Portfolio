@@ -5,7 +5,7 @@ import { Cursor } from "@/components/ui/Cursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://udaykiran.vercel.app"),
+  metadataBase: new URL("https://uday-kiran-battula.vercel.app"),
   title: {
     default: "Uday Kiran Battula — AI / ML Engineer",
     template: "%s · Uday Kiran Battula",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Uday Kiran Battula" }],
   openGraph: {
     type: "website",
-    url: "https://udaykiran.vercel.app",
+    url: "https://uday-kiran-battula.vercel.app",
     title: "Uday Kiran Battula — AI / ML Engineer",
     description:
       "AI / ML engineer building voice agents, RAG pipelines, and MCP systems in production.",
