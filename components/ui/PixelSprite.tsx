@@ -12,6 +12,7 @@ export function PixelSprite() {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (sessionStorage.getItem(DISMISS_KEY) === "1") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only sessionStorage read; useSyncExternalStore is overkill here
       setDismissed(true);
       return;
     }
