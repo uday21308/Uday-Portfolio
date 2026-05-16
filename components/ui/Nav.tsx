@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 import { HeaderSprite } from "./HeaderSprite";
 
 const links = [
-  { num: "01", label: "Work", href: "#experience" },
+  { num: "01", label: "Experience", href: "#experience" },
   { num: "02", label: "Projects", href: "#projects" },
   { num: "03", label: "Contact", href: "#contact" },
 ];

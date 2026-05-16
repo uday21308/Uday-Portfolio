@@ -29,7 +29,7 @@ export const credentials: Credential[] = [
   {
     title: "Introduction to Generative AI",
     source: "Google Cloud Skills Boost",
-    meta: "2024",
+    meta: "2025",
     icon: "google",
     accent: "cyan",
   },
