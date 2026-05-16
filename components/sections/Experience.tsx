@@ -1,13 +1,14 @@
 import { experience } from "@/content/experience";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function Experience() {
   return (
     <section id="experience" className="px-6 md:px-10 py-20 md:py-24">
       <div className="max-w-5xl mx-auto">
-        {experience.map((entry) => (
+        {experience.map((entry, i) => (
+          <Reveal key={entry.company} delay={i * 0.08}>
           <div
-            key={entry.company}
             className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-6 md:gap-8 py-6 border-b border-[var(--color-accent)]/10"
           >
             <p className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.14em] text-[var(--color-accent-cyan)] opacity-85 pt-1 whitespace-pre-line">
@@ -27,6 +28,7 @@ export function Experience() {
               </ul>
             </div>
           </div>
+          </Reveal>
         ))}
       </div>
     </section>

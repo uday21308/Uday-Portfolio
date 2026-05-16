@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
+import { Reveal } from "@/components/ui/Reveal";
 
 const paragraphs = [
   "AI / ML Engineer at *Mindcres*, architecting a multilingual voice grievance bot for a state-government portal — 25-state conversation flow, 4 FastAPI microservices, 2,300+ Pytest cases at 90%+ coverage.",
@@ -12,7 +13,7 @@ const paragraphs = [
 export function About() {
   return (
     <section id="about" className="px-6 md:px-10 py-20 md:py-24">
-      <div className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-10 items-start max-w-5xl mx-auto">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-10 items-start max-w-5xl mx-auto">
         <div className="w-[120px] h-[120px] rounded-full overflow-hidden border border-[var(--color-accent)]/20 bg-gradient-to-br from-[#1a1a2a] to-[var(--color-bg)]">
           <Image
             src={site.profileImage}
@@ -32,7 +33,7 @@ export function About() {
             </p>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
