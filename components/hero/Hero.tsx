@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
+import { HoloWorkstation } from "./HoloWorkstation";
 import { ScrollCue } from "./ScrollCue";
 
 const NeuralField = dynamic(() => import("./NeuralField").then((m) => m.NeuralField), {
@@ -50,6 +51,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0" aria-hidden>
         <NeuralField />
       </div>
+      <HoloWorkstation />
       <div className="relative z-10 w-full">
         <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
           {site.role} · {site.org}
