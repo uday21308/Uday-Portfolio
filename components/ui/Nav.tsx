@@ -10,7 +10,7 @@ const links = [
 
 export function Nav() {
   return (
-    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-5 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-accent)]/15 overflow-hidden">
+    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-7 md:py-8 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-accent)]/15 overflow-hidden">
       <HeaderSprite />
       <Link
         href="#top"

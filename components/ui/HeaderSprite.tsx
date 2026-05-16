@@ -23,19 +23,19 @@ export function HeaderSprite() {
         .sprite-track {
           position: absolute;
           left: 0;
-          bottom: 4px;
-          animation: spriteRun 18s ease-in-out infinite;
+          bottom: 0;
+          animation: spriteRun 22s ease-in-out infinite;
           will-change: transform;
           z-index: 0;
         }
         @keyframes spriteRun {
-          0%   { transform: translateX(8vw) scaleX(1); }
-          10%  { transform: translateX(8vw) scaleX(1); }              /* peek-pause left */
-          45%  { transform: translateX(calc(92vw - 30px)) scaleX(1); }
-          50%  { transform: translateX(calc(92vw - 30px)) scaleX(-1); } /* turn */
-          60%  { transform: translateX(calc(92vw - 30px)) scaleX(-1); } /* peek-pause right */
-          95%  { transform: translateX(8vw) scaleX(-1); }
-          100% { transform: translateX(8vw) scaleX(1); }               /* turn back */
+          0%   { transform: translateX(180px) scaleX(1); }
+          10%  { transform: translateX(180px) scaleX(1); }                 /* peek-pause left */
+          45%  { transform: translateX(calc(100vw - 220px)) scaleX(1); }
+          50%  { transform: translateX(calc(100vw - 220px)) scaleX(-1); }  /* turn */
+          60%  { transform: translateX(calc(100vw - 220px)) scaleX(-1); }  /* peek-pause right */
+          95%  { transform: translateX(180px) scaleX(-1); }
+          100% { transform: translateX(180px) scaleX(1); }                 /* turn back */
         }
         .sprite {
           position: relative;
@@ -97,7 +97,7 @@ export function HeaderSprite() {
         }
         @media (prefers-reduced-motion: reduce) {
           .sprite-track, .sprite .legs span, .sprite .eye { animation: none !important; }
-          .sprite-track { transform: translateX(8vw) !important; }
+          .sprite-track { transform: translateX(180px) !important; }
         }
       `}</style>
     </div>
