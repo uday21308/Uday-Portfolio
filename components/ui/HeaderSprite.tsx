@@ -29,13 +29,13 @@ export function HeaderSprite() {
           z-index: 0;
         }
         @keyframes spriteRun {
-          0%   { transform: translateX(180px) scaleX(1); }
-          10%  { transform: translateX(180px) scaleX(1); }                 /* peek-pause left */
-          45%  { transform: translateX(calc(100vw - 220px)) scaleX(1); }
-          50%  { transform: translateX(calc(100vw - 220px)) scaleX(-1); }  /* turn */
-          60%  { transform: translateX(calc(100vw - 220px)) scaleX(-1); }  /* peek-pause right */
-          95%  { transform: translateX(180px) scaleX(-1); }
-          100% { transform: translateX(180px) scaleX(1); }                 /* turn back */
+          0%   { transform: translateX(8px) scaleX(1); }
+          8%   { transform: translateX(8px) scaleX(1); }                   /* peek-pause left */
+          47%  { transform: translateX(calc(100vw - 36px)) scaleX(1); }
+          52%  { transform: translateX(calc(100vw - 36px)) scaleX(-1); }   /* turn */
+          60%  { transform: translateX(calc(100vw - 36px)) scaleX(-1); }   /* peek-pause right */
+          97%  { transform: translateX(8px) scaleX(-1); }
+          100% { transform: translateX(8px) scaleX(1); }                   /* turn back */
         }
         .sprite {
           position: relative;
@@ -97,7 +97,7 @@ export function HeaderSprite() {
         }
         @media (prefers-reduced-motion: reduce) {
           .sprite-track, .sprite .legs span, .sprite .eye { animation: none !important; }
-          .sprite-track { transform: translateX(180px) !important; }
+          .sprite-track { transform: translateX(8px) !important; }
         }
       `}</style>
     </div>

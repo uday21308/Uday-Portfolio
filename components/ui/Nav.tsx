@@ -15,15 +15,9 @@ export function Nav() {
       <HeaderSprite />
 
       {/* Logo + status */}
-      <Link href="#top" className="relative z-10 group flex flex-col leading-none">
+      <Link href="#top" className="relative z-10 group flex flex-col leading-none bg-[var(--color-bg)]/85 backdrop-blur-sm rounded-md px-2 -mx-2 py-1">
         <span className="font-[family-name:var(--font-display-alt)] font-extrabold uppercase text-xl md:text-2xl tracking-[-0.01em] text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition-colors">
-          UDAY{" "}
-          <span
-            className="font-[family-name:var(--font-serif)] italic font-medium text-[var(--color-accent)] normal-case"
-            style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
-          >
-            Kiran.
-          </span>
+          UDAY KIRAN.
         </span>
         <span className="hidden sm:flex items-center gap-2 mt-1.5 font-[family-name:var(--font-mono)] text-[9.5px] tracking-[0.22em] uppercase text-[var(--color-fg-muted)]/80">
           <span className="relative inline-flex w-1.5 h-1.5">
