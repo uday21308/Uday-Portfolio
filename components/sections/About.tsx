@@ -21,8 +21,9 @@ export function About() {
           <Image
             src={site.profileImage}
             alt={site.name}
-            width={320}
-            height={320}
+            width={160}
+            height={160}
+            sizes="160px"
             className="w-full h-full object-cover"
             priority
           />

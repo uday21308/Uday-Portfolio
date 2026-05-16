@@ -29,9 +29,9 @@ export function Skills() {
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 text-[var(--color-accent)]">
                     <Icon size={20} strokeWidth={1.75} />
                   </div>
-                  <h5 className="font-[family-name:var(--font-display-alt)] font-extrabold text-lg uppercase tracking-[-0.005em] text-[var(--color-fg)] m-0">
+                  <h4 className="font-[family-name:var(--font-display-alt)] font-extrabold text-lg uppercase tracking-[-0.005em] text-[var(--color-fg)] m-0">
                     {cat.label}
-                  </h5>
+                  </h4>
                 </div>
                 <div className="relative flex flex-wrap gap-1.5">
                   {cat.items.map((item) => (

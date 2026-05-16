@@ -48,9 +48,28 @@ export function Hero() {
           "radial-gradient(900px 380px at 70% 18%, rgba(167,139,250,.20) 0%, transparent 60%), radial-gradient(700px 320px at 25% 75%, rgba(108,207,255,.20) 0%, transparent 60%), var(--color-bg)",
       }}
     >
-      <div className="absolute inset-0 z-0" aria-hidden>
+      {/* WebGL only on >= lg viewports — heavy on mobile (drops mobile LCP/TBT) */}
+      <div className="absolute inset-0 z-0 hidden lg:block" aria-hidden>
         <NeuralField />
       </div>
+      {/* mobile fallback: static CSS starfield only, no canvas */}
+      <div
+        className="absolute inset-0 z-0 lg:hidden pointer-events-none"
+        aria-hidden
+        style={{
+          background: `
+            radial-gradient(1.5px 1.5px at 12% 30%, #6cf 60%, transparent 61%),
+            radial-gradient(1.5px 1.5px at 28% 70%, #a78bfa 60%, transparent 61%),
+            radial-gradient(1.5px 1.5px at 55% 22%, #fff 60%, transparent 61%),
+            radial-gradient(1px 1px at 38% 45%, #8df 60%, transparent 61%),
+            radial-gradient(1px 1px at 70% 80%, #aaf 60%, transparent 61%),
+            radial-gradient(1.5px 1.5px at 88% 35%, #a78bfa 60%, transparent 61%),
+            radial-gradient(1px 1px at 18% 90%, #6cf 60%, transparent 61%),
+            radial-gradient(1px 1px at 80% 55%, #fff 60%, transparent 61%)
+          `,
+          opacity: 0.7,
+        }}
+      />
       <HoloWorkstation />
       <div className="relative z-10 w-full">
         <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">

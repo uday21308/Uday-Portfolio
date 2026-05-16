@@ -2,6 +2,13 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "chrome >= 110",
+    "firefox >= 110",
+    "edge >= 110",
+    "safari >= 16",
+    "ios_saf >= 16"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
