@@ -26,15 +26,14 @@ export function HeaderSprite() {
           position: absolute;
           left: 0;
           right: 0;
-          top: 50%;
-          transform: translateY(-50%);
+          bottom: 2px;
           height: 36px;
           z-index: 0;
         }
         .sprite-track {
           position: absolute;
           left: 0;
-          top: 0;
+          bottom: 0;
           animation: spriteRun 22s ease-in-out infinite;
           will-change: transform;
         }
