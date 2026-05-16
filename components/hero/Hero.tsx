@@ -1,5 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { site } from "@/content/site";
 import { withItalicAccents } from "@/components/ui/ItalicAccent";
 import { ScrollCue } from "./ScrollCue";
@@ -10,8 +12,34 @@ const NeuralField = dynamic(() => import("./NeuralField").then((m) => m.NeuralFi
 });
 
 export function Hero() {
+  const containerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-line", {
+        y: 60,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.9,
+        ease: "power3.out",
+        delay: 0.2,
+      });
+      gsap.from(".hero-eyebrow, .hero-tagline", {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        delay: 0.1,
+        stagger: 0.2,
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={containerRef}
       id="top"
       className="relative min-h-screen px-6 md:px-10 pt-16 pb-24 flex flex-col justify-between overflow-hidden"
       style={{
@@ -24,17 +52,17 @@ export function Hero() {
       </div>
       <div className="relative z-10" />
       <div className="relative z-10 max-w-6xl mx-auto w-full">
-        <p className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
+        <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
           {site.role} · {site.org}
         </p>
         <h1 className="font-[family-name:var(--font-display)] font-extrabold uppercase leading-[0.92] tracking-[-0.005em] m-0 mb-4 text-6xl md:text-8xl lg:text-[92px]">
           {site.heroLines.map((line, i) => (
-            <span key={i} className="block">
+            <span key={i} className="hero-line block">
               {withItalicAccents(line)}
             </span>
           ))}
         </h1>
-        <p className="font-[family-name:var(--font-sans)] text-base md:text-lg opacity-[0.78] max-w-[580px] leading-[1.5]">
+        <p className="hero-tagline font-[family-name:var(--font-sans)] text-base md:text-lg opacity-[0.78] max-w-[580px] leading-[1.5]">
           {site.tagline}
         </p>
       </div>
