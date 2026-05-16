@@ -4,13 +4,11 @@ import { useEffect, useRef, useState } from "react";
 const DISMISS_KEY = "uk-sprite-dismissed";
 
 export function PixelSprite() {
-  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const tickRef = useRef<number | null>(null);
 
   useEffect(() => {
-    setMounted(true);
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (sessionStorage.getItem(DISMISS_KEY) === "1") {
@@ -49,7 +47,7 @@ export function PixelSprite() {
     setDismissed(true);
   }
 
-  if (!mounted || dismissed) return null;
+  if (dismissed) return null;
 
   return (
     <div
