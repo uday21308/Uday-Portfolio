@@ -11,14 +11,7 @@ const links = [
 
 export function Nav() {
   return (
-    <nav
-      className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-3.5 md:py-4 backdrop-blur-xl border-b border-[var(--color-accent)]/20 overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, rgba(6,8,15,0.96) 0%, rgba(18,14,38,0.92) 50%, rgba(6,8,15,0.96) 100%)",
-        boxShadow: "0 6px 24px -12px rgba(167,139,250,0.18)",
-      }}
-    >
+    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-3.5 md:py-4 bg-[var(--color-bg)]/92 backdrop-blur-md border-b border-[var(--color-accent)]/15 overflow-hidden">
       <HeaderSprite />
 
       {/* Logo + status */}
