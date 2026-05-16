@@ -6,27 +6,37 @@ export function HeaderSprite() {
       aria-hidden
       className="hidden md:block absolute inset-x-0 bottom-0 h-full pointer-events-none overflow-hidden"
     >
-      <div className="sprite-track">
-        <div className="sprite">
-          <span className="ant" />
-          <div className="body">
-            <span className="eye eye-l" />
-            <span className="eye eye-r" />
-          </div>
-          <div className="legs">
-            <span />
-            <span />
+      <div className="sprite-wrap">
+        <div className="sprite-track">
+          <div className="sprite">
+            <span className="ant" />
+            <div className="body">
+              <span className="eye eye-l" />
+              <span className="eye eye-r" />
+            </div>
+            <div className="legs">
+              <span />
+              <span />
+            </div>
           </div>
         </div>
       </div>
       <style>{`
+        .sprite-wrap {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 36px;
+          z-index: 0;
+        }
         .sprite-track {
           position: absolute;
           left: 0;
-          bottom: 0;
+          top: 0;
           animation: spriteRun 22s ease-in-out infinite;
           will-change: transform;
-          z-index: 0;
         }
         @keyframes spriteRun {
           0%   { transform: translateX(8px) scaleX(1); }
