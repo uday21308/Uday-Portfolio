@@ -9,11 +9,11 @@ export function Projects() {
   return (
     <section id="projects" className="px-6 md:px-10 py-20 md:py-24">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 auto-rows-fr">
           {projects.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.08}>
+            <Reveal key={p.title} delay={i * 0.08} className="h-full">
               <article
-                className="flex flex-col border border-[var(--color-accent)]/12 rounded-xl p-6 bg-[var(--color-accent)]/[0.02] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent)]/40"
+                className="flex flex-col h-full border border-[var(--color-accent)]/12 rounded-xl p-6 bg-[var(--color-accent)]/[0.02] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent)]/40"
               >
                 <p className="font-[family-name:var(--font-mono)] text-[10px] tracking-[0.18em] uppercase text-[var(--color-accent-cyan)] opacity-70">
                   {p.year}

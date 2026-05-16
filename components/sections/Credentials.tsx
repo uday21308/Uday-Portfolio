@@ -3,9 +3,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function Credentials() {
   return (
-    <section id="credentials" className="px-6 md:px-10 py-20 md:py-24">
-      <p className="font-[family-name:var(--font-mono)] text-[10.5px] tracking-[0.2em] uppercase text-[var(--color-accent)] opacity-70 mb-4 max-w-5xl mx-auto">
-        — Credentials
+    <section id="certifications" className="px-6 md:px-10 py-20 md:py-24">
+      <p className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] opacity-80 mb-4 max-w-5xl mx-auto">
+        — Certifications
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
         {credentials.map((c, i) => (

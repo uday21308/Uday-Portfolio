@@ -9,16 +9,20 @@ const links = [
 
 export function Nav() {
   return (
-    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-4 bg-[var(--color-bg)]/85 backdrop-blur-md border-b border-[var(--color-accent)]/10">
+    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-5 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-accent)]/15">
       <Link
         href="#top"
-        className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.16em] uppercase text-[var(--color-accent)] font-semibold"
+        className="font-[family-name:var(--font-mono)] text-[13px] md:text-sm tracking-[0.18em] uppercase text-[var(--color-accent)] font-bold hover:opacity-80 transition-opacity"
       >
         {site.shortName}
       </Link>
-      <div className="hidden md:flex gap-6 font-[family-name:var(--font-mono)] text-[11px] tracking-[0.16em] uppercase opacity-75">
+      <div className="hidden md:flex gap-8 font-[family-name:var(--font-mono)] text-[13px] tracking-[0.18em] uppercase text-[var(--color-fg)] font-medium">
         {links.map((l) => (
-          <Link key={l.href} href={l.href} className="hover:opacity-100 transition-opacity">
+          <Link
+            key={l.href}
+            href={l.href}
+            className="opacity-85 hover:opacity-100 hover:text-[var(--color-accent)] transition-all"
+          >
             {l.label}
           </Link>
         ))}
@@ -26,7 +30,7 @@ export function Nav() {
       <a
         href={site.resumePath}
         download
-        className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.16em] uppercase px-3.5 py-1.5 border border-[var(--color-accent)] rounded-full text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+        className="font-[family-name:var(--font-mono)] text-[12px] md:text-[13px] tracking-[0.18em] uppercase px-4 py-2 border border-[var(--color-accent)] rounded-full text-[var(--color-accent)] font-semibold hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
       >
         Resume ↓
       </a>

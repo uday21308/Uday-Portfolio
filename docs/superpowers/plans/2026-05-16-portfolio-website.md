@@ -180,22 +180,22 @@ export function cn(...inputs: ClassValue[]): string {
 Create `D:\Portfolio\lib\fonts.ts`:
 ```typescript
 import {
-  Big_Shoulders_Stencil_Display,
-  Big_Shoulders_Display,
+  Big_Shoulders_Stencil,
+  Big_Shoulders,
   Fraunces,
   DM_Sans,
   Inter,
   JetBrains_Mono,
 } from "next/font/google";
 
-export const fontDisplay = Big_Shoulders_Stencil_Display({
+export const fontDisplay = Big_Shoulders_Stencil({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-display",
   display: "swap",
 });
 
-export const fontDisplayAlt = Big_Shoulders_Display({
+export const fontDisplayAlt = Big_Shoulders({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-display-alt",
@@ -205,7 +205,7 @@ export const fontDisplayAlt = Big_Shoulders_Display({
 export const fontSerif = Fraunces({
   subsets: ["latin"],
   style: ["italic"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-serif",
   display: "swap",

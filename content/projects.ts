@@ -39,11 +39,4 @@ export const projects: Project[] = [
     tags: ["FastMCP", "Claude", "SQLite", "MCP"],
     link: "https://github.com/uday21308/Expense-Tracker-MCP",
   },
-  {
-    year: "2024",
-    title: "Car Damage → Mobile",
-    description:
-      "DenseNet-169 fine-tune · 6 damage classes (cracks, dents, scratches, glass shatter, flat tyres, lamp breakage) · *95%* accuracy from a 82% CNN baseline · exported to TFLite · native Kotlin Android app for on-device offline inference.",
-    tags: ["PyTorch", "TFLite", "Kotlin", "DenseNet"],
-  },
 ];
