@@ -51,7 +51,7 @@ export function Hero() {
         <NeuralField />
       </div>
       <div className="relative z-10" />
-      <div className="relative z-10 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 w-full">
         <p className="hero-eyebrow font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent-cyan)] mb-5 opacity-90">
           {site.role} · {site.org}
         </p>
