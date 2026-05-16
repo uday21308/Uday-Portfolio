@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { fontVariables } from "@/lib/fonts";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { Cursor } from "@/components/ui/Cursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={fontVariables}>
       <body>
         <LenisProvider>{children}</LenisProvider>
+        <Cursor />
       </body>
     </html>
   );

@@ -33,7 +33,7 @@ const PANELS: PanelDef[] = [
     pulse: true,
     accent: "violet",
     pos: { top: 0, left: 0 },
-    width: 42,
+    width: 44,
     delay: 0,
   },
   {
@@ -48,6 +48,18 @@ const PANELS: PanelDef[] = [
     delay: 0.5,
   },
   {
+    key: "mcp",
+    Icon: MessageSquare,
+    label: "MCP",
+    value: "12 tools · active",
+    sub: "stdio · fastmcp · claude",
+    pulse: true,
+    accent: "lime",
+    pos: { bottom: 0, left: 0 },
+    width: 44,
+    delay: 1,
+  },
+  {
     key: "claude-code",
     Icon: Braces,
     label: "Claude Code",
@@ -55,32 +67,9 @@ const PANELS: PanelDef[] = [
     sub: "✓ shipped in 38s",
     okSub: true,
     accent: "cream",
-    pos: { top: 42, right: 0 },
+    pos: { bottom: 0, right: 0 },
     width: 44,
-    delay: 1,
-  },
-  {
-    key: "mcp",
-    Icon: MessageSquare,
-    label: "MCP",
-    value: "12 tools registered",
-    sub: "stdio · fastmcp · claude",
-    accent: "cyan",
-    pos: { top: 42, left: 0 },
-    width: 42,
     delay: 1.5,
-  },
-  {
-    key: "agent",
-    Icon: Sparkles,
-    label: "Agent",
-    value: "active",
-    sub: "tools · memory · context",
-    pulse: true,
-    accent: "lime",
-    pos: { bottom: 0, left: "50%" as unknown as number, right: undefined },
-    width: 46,
-    delay: 2,
   },
 ];
 
@@ -88,7 +77,7 @@ export function HoloWorkstation() {
   return (
     <div
       aria-hidden
-      className="holo-root hidden lg:block absolute right-[2%] xl:right-[4%] top-1/2 -translate-y-1/2 z-[5] w-[460px] xl:w-[520px] h-[460px] xl:h-[520px] pointer-events-none"
+      className="holo-root hidden lg:block absolute right-[2%] xl:right-[4%] top-[48%] -translate-y-1/2 z-[5] w-[460px] xl:w-[520px] h-[460px] xl:h-[520px] pointer-events-none"
     >
       <div className="holo-grid" />
 
@@ -105,23 +94,21 @@ export function HoloWorkstation() {
           <br />
           <span className="text-[#9aff9a]">✓ response ready</span>
         </div>
-        <div className="holo-scan" />
       </div>
 
-      {/* connector beams from workspace to each panel corner */}
+      {/* connector beams from workspace to each of 4 corner panels */}
       <svg className="holo-beams" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
         <defs>
           <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(108,207,255,0)" />
-            <stop offset="50%" stopColor="rgba(108,207,255,0.6)" />
+            <stop offset="50%" stopColor="rgba(108,207,255,0.65)" />
             <stop offset="100%" stopColor="rgba(108,207,255,0)" />
           </linearGradient>
         </defs>
-        <line x1="50" y1="50" x2="12" y2="12" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l1" />
-        <line x1="50" y1="50" x2="88" y2="12" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l2" />
-        <line x1="50" y1="50" x2="88" y2="55" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l3" />
-        <line x1="50" y1="50" x2="12" y2="55" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l4" />
-        <line x1="50" y1="50" x2="50" y2="92" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l5" />
+        <line x1="50" y1="50" x2="18" y2="14" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l1" />
+        <line x1="50" y1="50" x2="82" y2="14" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l2" />
+        <line x1="50" y1="50" x2="18" y2="86" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l3" />
+        <line x1="50" y1="50" x2="82" y2="86" stroke="url(#beamGrad)" strokeWidth="0.3" strokeDasharray="0.6 1.4" className="beam-l4" />
       </svg>
 
       {/* floating panels */}
@@ -137,10 +124,6 @@ export function HoloWorkstation() {
         if (p.pos.bottom !== undefined) style.bottom = typeof p.pos.bottom === "number" ? `${p.pos.bottom}%` : p.pos.bottom;
         if (p.pos.left !== undefined) style.left = typeof p.pos.left === "number" ? `${p.pos.left}%` : p.pos.left;
         if (p.pos.right !== undefined) style.right = typeof p.pos.right === "number" ? `${p.pos.right}%` : p.pos.right;
-        if (p.key === "agent") {
-          // center the bottom panel
-          style.transform = "translateX(-50%)";
-        }
         return (
           <div key={p.key} className="holo-panel absolute" style={style}>
             <div className="holo-panel-h" style={{ color: s.color }}>
@@ -200,20 +183,7 @@ export function HoloWorkstation() {
         .holo-monitor-body {
           margin-top: 9px; font-size: 8.5px; color: #cfd2dc; line-height: 1.55;
         }
-        .holo-scan {
-          position: absolute; left: 8px; right: 8px; height: 1px;
-          background: linear-gradient(90deg, transparent, #6ccfff, transparent);
-          animation: holoScan 2.8s linear infinite;
-          top: 32px;
-        }
-        @keyframes holoScan {
-          0% { top: 32px; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { top: calc(100% - 8px); opacity: 0; }
-        }
-
-        .holo-beams {
+.holo-beams {
           position: absolute;
           inset: 0;
           width: 100%; height: 100%;
@@ -225,7 +195,6 @@ export function HoloWorkstation() {
         .holo-beams .beam-l2 { animation-delay: 0.5s; }
         .holo-beams .beam-l3 { animation-delay: 1s; }
         .holo-beams .beam-l4 { animation-delay: 1.5s; }
-        .holo-beams .beam-l5 { animation-delay: 2s; }
         @keyframes beamFlow {
           0% { stroke-dashoffset: 0; opacity: 0.3; }
           50% { opacity: 0.9; }
@@ -262,15 +231,12 @@ export function HoloWorkstation() {
         }
         @keyframes holoDotPulse { 0%{opacity:.45} 100%{opacity:1} }
         @keyframes holoFloat {
-          0%   { transform: translateY(0) translateX(var(--tx, 0)); }
-          100% { transform: translateY(-8px) translateX(var(--tx, 0)); }
-        }
-        .holo-panel[style*="translateX(-50%)"] {
-          --tx: -50%;
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-8px); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .holo-panel, .holo-scan, .holo-beams line, .holo-pulse {
+          .holo-panel, .holo-beams line, .holo-pulse {
             animation: none !important;
           }
         }

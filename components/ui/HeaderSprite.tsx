@@ -34,17 +34,15 @@ export function HeaderSprite() {
           position: absolute;
           left: 0;
           bottom: 0;
-          animation: spriteRun 22s ease-in-out infinite;
+          animation: spriteRun 45s linear infinite;
           will-change: transform;
         }
         @keyframes spriteRun {
           0%   { transform: translateX(8px) scaleX(1); }
-          8%   { transform: translateX(8px) scaleX(1); }                   /* peek-pause left */
-          47%  { transform: translateX(calc(100vw - 26px)) scaleX(1); }
-          52%  { transform: translateX(calc(100vw - 26px)) scaleX(-1); }   /* turn */
-          60%  { transform: translateX(calc(100vw - 26px)) scaleX(-1); }   /* peek-pause right */
-          97%  { transform: translateX(8px) scaleX(-1); }
-          100% { transform: translateX(8px) scaleX(1); }                   /* turn back */
+          48%  { transform: translateX(calc(100vw - 26px)) scaleX(1); }
+          50%  { transform: translateX(calc(100vw - 26px)) scaleX(-1); }
+          98%  { transform: translateX(8px) scaleX(-1); }
+          100% { transform: translateX(8px) scaleX(1); }
         }
         .sprite {
           position: relative;
