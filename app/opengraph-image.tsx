@@ -40,7 +40,7 @@ export default async function OpengraphImage() {
           </div>
         </div>
         <div style={{ fontSize: 24, color: "#CFD2DC", opacity: 0.85 }}>
-          udaykiran.vercel.app
+          uday-kiran-battula.vercel.app
         </div>
       </div>
     ),
