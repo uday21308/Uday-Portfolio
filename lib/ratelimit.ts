@@ -3,7 +3,7 @@ import { redis } from "./redis";
 
 export const chatLimiter = new Ratelimit({
   redis: redis(),
-  limiter: Ratelimit.slidingWindow(10, "1 h"),
+  limiter: Ratelimit.slidingWindow(60, "1 h"),
   prefix: "rl:chat",
   analytics: false,
 });
