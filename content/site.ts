@@ -13,7 +13,7 @@ export const site = {
   },
   githubUsername: "uday21308",
   resumePath: "/resume/Uday_Kiran_Battula_AIML.pdf",
-  profileImage: "/images/profile-avatar.png",
+  profileImage: "/images/profile-avatar-v3.png",
   totalRepoCount: 11,
 } as const;
 
