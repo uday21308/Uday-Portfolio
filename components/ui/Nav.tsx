@@ -11,7 +11,7 @@ const links = [
 
 export function Nav() {
   return (
-    <nav className="sticky top-0 z-30 flex items-center justify-between px-6 md:px-10 py-5 md:py-6 bg-[var(--color-bg)]/92 backdrop-blur-md border-b border-[var(--color-accent)]/15 overflow-hidden">
+    <nav className="sticky top-0 z-30 flex items-start justify-between px-6 md:px-10 pt-3 pb-9 md:pt-3 md:pb-10 bg-[var(--color-bg)]/92 backdrop-blur-md border-b border-[var(--color-accent)]/15 overflow-hidden">
       <HeaderSprite />
 
       {/* Logo + status */}
