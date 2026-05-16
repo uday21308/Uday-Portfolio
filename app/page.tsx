@@ -9,6 +9,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Credentials } from "@/components/sections/Credentials";
 import { Contact } from "@/components/sections/Contact";
+import { PixelSprite } from "@/components/ui/PixelSprite";
 
 export default function Page() {
   return (
@@ -28,6 +29,7 @@ export default function Page() {
         <Contact />
       </main>
       <Footer />
+      <PixelSprite />
     </>
   );
 }
