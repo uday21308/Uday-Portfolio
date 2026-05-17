@@ -1,0 +1,36 @@
+name: guardrails
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build knowledge base
+        env:
+          GITHUB_USER: uday21308
+        run: npm run build:kb
+
+      - name: Run vitest suite
+        run: npm test
+
+      - name: Run adversarial guardrail suite
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+        run: npm run test:guardrails

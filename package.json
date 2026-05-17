@@ -19,7 +19,8 @@
     "test:cov": "vitest run --coverage",
     "build:kb": "tsx scripts/build-kb.ts",
     "prebuild": "npm run build:kb",
-    "test:integration": "vitest run --config vitest.integration.config.ts"
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:guardrails": "dotenv -e .env.local -- tsx scripts/test-guardrails.ts"
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.39",
@@ -56,6 +57,7 @@
     "@types/react-dom": "^19",
     "@types/three": "^0.184.1",
     "@vitest/coverage-v8": "^2.1.9",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "happy-dom": "^15.11.7",
