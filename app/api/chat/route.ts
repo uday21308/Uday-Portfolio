@@ -3,6 +3,7 @@ import path from "node:path";
 import { Retriever } from "@/lib/rag/retriever";
 import { embed } from "@/lib/rag/embedder";
 import { streamChat } from "@/lib/ai/groq";
+import { sweep } from "@/lib/ai/guardrails";
 import { buildChatMessages } from "@/lib/ai/prompts";
 import { loadHistory, appendExchange } from "@/lib/redis";
 import { chatLimiter, ipFromRequest } from "@/lib/ratelimit";
@@ -80,6 +81,12 @@ export async function POST(req: Request): Promise<Response> {
           },
         });
         fullText = full || fullText;
+
+        const swept = sweep(fullText);
+        if (swept !== fullText) {
+          controller.enqueue(encoder.encode(sseEvent("redacted", { text: swept })));
+          fullText = swept;
+        }
 
         await appendExchange(sessionId, { role: "user", content: parsed.message, ts: Date.now() });
         await appendExchange(sessionId, { role: "assistant", content: fullText, ts: Date.now() });

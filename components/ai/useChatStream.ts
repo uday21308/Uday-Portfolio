@@ -79,6 +79,10 @@ export function useChatStream() {
             const u = JSON.parse(ev.data);
             assistant = { ...assistant, usage: { cost: u.cost, totalTokens: u.totalTokens, latencyMs: Math.round(performance.now() - start), model: u.model } };
             setPendingAssistant({ ...assistant });
+          } else if (ev.event === "redacted") {
+            const { text } = JSON.parse(ev.data);
+            assistant = { ...assistant, content: text };
+            setPendingAssistant({ ...assistant });
           }
         }
       }

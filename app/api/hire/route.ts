@@ -3,6 +3,7 @@ import path from "node:path";
 import { Retriever } from "@/lib/rag/retriever";
 import { embed } from "@/lib/rag/embedder";
 import { chatJSON } from "@/lib/ai/groq";
+import { sweep } from "@/lib/ai/guardrails";
 import { buildHireMessages } from "@/lib/ai/prompts";
 import { hireLimiter, ipFromRequest } from "@/lib/ratelimit";
 
@@ -51,5 +52,11 @@ export async function POST(req: Request): Promise<Response> {
   if (!safe.success) {
     return new Response(JSON.stringify({ error: "model returned invalid shape" }), { status: 502 });
   }
-  return Response.json({ ...safe.data, usage });
+  return Response.json({
+    ...safe.data,
+    strengths: safe.data.strengths.map(sweep),
+    tailoredBullets: safe.data.tailoredBullets.map(sweep),
+    coverParagraph: sweep(safe.data.coverParagraph),
+    usage,
+  });
 }
