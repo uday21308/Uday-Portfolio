@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 vi.mock("@/lib/rag/retriever", () => ({
   Retriever: { load: vi.fn().mockResolvedValue({ topK: () => [] }) },
 }));
-vi.mock("@/lib/rag/embedder", () => ({ embed: vi.fn().mockResolvedValue([1, 0, 0]) }));
+vi.mock("@/lib/rag/embedder-api", () => ({ embed: vi.fn().mockResolvedValue([1, 0, 0]) }));
 vi.mock("@/lib/ai/groq", () => ({
   DEFAULT_MODEL: "llama-3.3-70b-versatile",
   chatJSON: vi.fn().mockResolvedValue({

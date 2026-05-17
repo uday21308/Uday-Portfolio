@@ -7,7 +7,7 @@ vi.mock("@/lib/rag/retriever", () => ({
     }),
   },
 }));
-vi.mock("@/lib/rag/embedder", () => ({ embed: vi.fn().mockResolvedValue([1, 0, 0]) }));
+vi.mock("@/lib/rag/embedder-api", () => ({ embed: vi.fn().mockResolvedValue([1, 0, 0]) }));
 vi.mock("@/lib/ai/groq", () => ({
   DEFAULT_MODEL: "llama-3.3-70b-versatile",
   streamChat: vi.fn(async (_msgs, opts) => {
