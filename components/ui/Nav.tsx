@@ -4,9 +4,9 @@ import { site } from "@/content/site";
 import { HeaderSprite } from "./HeaderSprite";
 
 const links = [
-  { num: "01", label: "Experience", href: "#experience" },
-  { num: "02", label: "Projects", href: "#projects" },
-  { num: "03", label: "Contact", href: "#contact" },
+  { num: "01", label: "Experience", href: "/#experience" },
+  { num: "02", label: "Projects", href: "/#projects" },
+  { num: "03", label: "Contact", href: "/#contact" },
 ];
 
 export function Nav() {
@@ -16,7 +16,7 @@ export function Nav() {
 
       {/* Logo + status */}
       <Link
-        href="#top"
+        href="/#top"
         className="relative z-10 group flex flex-col leading-none bg-[var(--color-bg)]/85 backdrop-blur-sm rounded-md px-2.5 py-1.5 -mx-2.5"
       >
         <span className="font-[family-name:var(--font-display-alt)] font-extrabold uppercase text-[17px] md:text-lg tracking-[-0.01em] text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition-colors">

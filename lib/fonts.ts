@@ -12,6 +12,7 @@ export const fontDisplay = Big_Shoulders_Stencil({
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-display",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const fontDisplayAlt = Big_Shoulders({
@@ -19,6 +20,7 @@ export const fontDisplayAlt = Big_Shoulders({
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-display-alt",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const fontSerif = Fraunces({
