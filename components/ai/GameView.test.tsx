@@ -1,21 +1,24 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-
-globalThis.fetch = vi.fn(async () =>
-  new Response(JSON.stringify({ valid: true, nextWord: "tokenizer", reaction: "nice" }), { status: 200 })
-) as any;
-
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
 import { GameView } from "./GameView";
 
-describe("GameView", () => {
-  it("shows starting bot word", () => {
+describe("GameView (Bug Dodger)", () => {
+  it("renders the start overlay by default", () => {
     render(<GameView />);
-    expect(screen.getByTestId("bot-word")).toBeInTheDocument();
+    // title appears in both header and overlay → match by overlay-only Start button
+    expect(screen.getByRole("button", { name: /start/i })).toBeInTheDocument();
+    expect(screen.getByText(/help the ai engineer dodge/i)).toBeInTheDocument();
   });
-  it("submits user word and shows next bot word", async () => {
+
+  it("shows the status header with score", () => {
     render(<GameView />);
-    fireEvent.change(screen.getByPlaceholderText(/your word/i), { target: { value: "attention" } });
-    fireEvent.click(screen.getByText(/play/i));
-    await waitFor(() => expect(screen.getByText("tokenizer")).toBeInTheDocument());
+    expect(screen.getByText(/space or tap to jump/i)).toBeInTheDocument();
+    // initial score is 00000
+    expect(screen.getByText(/BEST 00000 · 00000/i)).toBeInTheDocument();
+  });
+
+  it("exposes the arena as a clickable region", () => {
+    render(<GameView />);
+    expect(screen.getByRole("button", { name: /game arena/i })).toBeInTheDocument();
   });
 });
