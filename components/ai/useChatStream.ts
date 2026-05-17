@@ -83,8 +83,20 @@ export function useChatStream() {
             const { text } = JSON.parse(ev.data);
             assistant = { ...assistant, content: text };
             setPendingAssistant({ ...assistant });
+          } else if (ev.event === "error") {
+            // Server-side failure mid-stream (Groq error, etc.)
+            const payload = (() => { try { return JSON.parse(ev.data); } catch { return { message: ev.data }; } })();
+            const msg = payload?.message ?? "stream failed";
+            console.error("[useChatStream] server error event:", msg);
+            assistant = { ...assistant, content: assistant.content || `Sorry — ${msg}. Try again?` };
+            setPendingAssistant({ ...assistant });
           }
         }
+      }
+      // If we received NO tokens AND no content, surface that explicitly
+      // so the UI never shows a totally blank bubble.
+      if (!assistant.content) {
+        assistant = { ...assistant, content: "Sorry — no response received. Check the dev server terminal for errors." };
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "unknown error";

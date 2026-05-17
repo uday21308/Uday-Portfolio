@@ -12,8 +12,27 @@ const PATTERNS: { re: RegExp; replacement: string }[] = [
   { re: /\b\d+(?:\.\d+)?\s?[Cc]rore(?:s)?\b/g, replacement: REJECTION.salary },
 ];
 
+// Strip fake inline citation markers the model sometimes inserts even when
+// told not to. Sources are surfaced in the UI's collapsed citations panel.
+function stripFakeCitations(text: string): string {
+  return text
+    // [#1], [#42], [# 1]
+    .replace(/\s*\[#\s*\d+\s*\]/g, "")
+    // (#1), (#42)
+    .replace(/\s*\(#\s*\d+\s*\)/g, "")
+    // Plain [1], [42] when followed by a space, end-of-string, or punctuation
+    // (avoids stripping things like [version 2] but catches "as mentioned [1].")
+    .replace(/\s*\[\s*\d+\s*\](?=[\s.,;:!?)]|$)/g, "")
+    // Source-tag echoes like "(source: faq)" / "[source: linkedin]"
+    .replace(/\s*[(\[]\s*source:?\s*[^)\]]+[)\]]/gi, "")
+    // Tidy up double spaces and orphaned space-before-punct
+    .replace(/\s+([.,;:!?])/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 export function sweep(text: string): string {
   let out = text;
   for (const { re, replacement } of PATTERNS) out = out.replace(re, replacement);
-  return out;
+  return stripFakeCitations(out);
 }
