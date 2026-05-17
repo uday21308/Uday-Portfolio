@@ -1,7 +1,7 @@
 import { z } from "zod";
 import path from "node:path";
 import { Retriever } from "@/lib/rag/retriever";
-import { embed } from "@/lib/rag/embedder";
+import { embed } from "@/lib/rag/embedder-api";
 import { streamChat } from "@/lib/ai/groq";
 import { sweep } from "@/lib/ai/guardrails";
 import { buildChatMessages } from "@/lib/ai/prompts";

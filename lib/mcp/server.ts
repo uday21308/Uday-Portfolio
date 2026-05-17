@@ -1,6 +1,6 @@
 import path from "node:path";
 import { Retriever, type ScoredChunk, type StoredChunk } from "@/lib/rag/retriever";
-import { embed } from "@/lib/rag/embedder";
+import { embed } from "@/lib/rag/embedder-api";
 import { streamChat, chatJSON } from "@/lib/ai/groq";
 import { buildChatMessages, buildHireMessages } from "@/lib/ai/prompts";
 
