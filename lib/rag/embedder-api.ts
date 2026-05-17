@@ -1,76 +1,57 @@
 /**
- * Runtime embedder — calls the HuggingFace Inference API.
+ * Runtime embedder — uses HuggingFace's official Inference SDK.
  *
  * Why this exists separately from `embedder.ts`:
- *   - `embedder.ts` uses `@huggingface/transformers` (ONNX native runtime).
+ *   - `embedder.ts` uses `@huggingface/transformers` (local ONNX runtime).
  *     Works in Node CI / Vercel build env. Used at build time by build-kb.
  *   - Vercel serverless containers do NOT ship `libonnxruntime.so.1`, so the
  *     local package fails to load at runtime.
- *   - This file uses HF's hosted Inference API instead — just `fetch`, no
- *     native deps. Same model (`all-MiniLM-L6-v2`), so 384-dim vectors are
- *     bitwise-compatible with the ones in `data/embeddings.json`.
+ *   - This file uses the hosted Inference Providers API via the official
+ *     `@huggingface/inference` SDK. Same model (`all-MiniLM-L6-v2`), so
+ *     384-dim vectors stay compatible with `data/embeddings.json`.
  *
- * Required env var: HF_API_KEY (free tier — huggingface.co → Settings →
- * Access Tokens → "New token" with "Read" role).
+ * Required env var: HF_API_KEY (get at https://huggingface.co/settings/tokens).
+ * The token should be a fine-grained token with "Make calls to Inference
+ * Providers" permission (or a legacy read token that still has access).
+ *
+ * HF deprecated direct api-inference.huggingface.co URLs in favor of the
+ * router (router.huggingface.co/hf-inference/...). Using the SDK shields us
+ * from future URL changes.
  */
-export const EMBED_DIM = 384;
+import { InferenceClient } from "@huggingface/inference";
 
+export const EMBED_DIM = 384;
 const MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2";
-// HF deprecated the /pipeline/feature-extraction/{model} route — current
-// stable endpoint is /models/{model}. Same auth, similar body shape.
-const ENDPOINT = `https://api-inference.huggingface.co/models/${MODEL_ID}`;
+
+let _client: InferenceClient | null = null;
+function client(): InferenceClient {
+  if (!_client) {
+    const apiKey = process.env.HF_API_KEY;
+    if (!apiKey) {
+      throw new Error(
+        "HF_API_KEY env var is required at runtime. Get a fine-grained token with 'Make calls to Inference Providers' permission at https://huggingface.co/settings/tokens",
+      );
+    }
+    _client = new InferenceClient(apiKey);
+  }
+  return _client;
+}
 
 export async function embed(text: string): Promise<number[]> {
-  const apiKey = process.env.HF_API_KEY;
-  if (!apiKey) {
-    throw new Error(
-      "HF_API_KEY env var is required at runtime. Get a free token at https://huggingface.co/settings/tokens",
-    );
-  }
-
-  const res = await fetch(ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      inputs: text,
-      // wait_for_model avoids 503 on cold starts (initial load 20-30s);
-      // sentence-similarity tasks should return pooled vectors directly.
-      options: { wait_for_model: true },
-    }),
+  const result = await client().featureExtraction({
+    model: MODEL_ID,
+    inputs: text,
+    provider: "hf-inference",
   });
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`HF Inference API failed: ${res.status} ${body.slice(0, 200)}`);
+  // featureExtraction returns either number[] (pooled vector) or number[][]
+  // (token-level) depending on the model. all-MiniLM-L6-v2 has built-in
+  // mean-pooling so we expect flat number[]; handle both defensively.
+  if (Array.isArray(result) && typeof result[0] === "number") {
+    return result as number[];
   }
-
-  // sentence-transformers models on the /models/ endpoint return either:
-  //   number[]                 — pooled + normalized sentence vector (preferred)
-  //   number[][]               — single-batch wrapper around the above
-  //   number[][][]             — token-level vectors needing mean-pool
-  const data = (await res.json()) as unknown;
-
-  if (Array.isArray(data) && typeof data[0] === "number") {
-    return data as number[];
+  if (Array.isArray(result) && Array.isArray(result[0])) {
+    return result[0] as number[];
   }
-  if (Array.isArray(data) && Array.isArray(data[0]) && typeof (data[0] as unknown[])[0] === "number") {
-    return data[0] as number[];
-  }
-  if (
-    Array.isArray(data) &&
-    Array.isArray(data[0]) &&
-    Array.isArray((data[0] as unknown[])[0])
-  ) {
-    // Token-level — mean-pool to a single vector
-    const tokens = data[0] as number[][];
-    const dim = tokens[0].length;
-    const vec = new Array<number>(dim).fill(0);
-    for (const t of tokens) for (let i = 0; i < dim; i++) vec[i] += t[i];
-    for (let i = 0; i < dim; i++) vec[i] /= tokens.length;
-    return vec;
-  }
-  throw new Error(`Unexpected HF response shape: ${JSON.stringify(data).slice(0, 120)}`);
+  throw new Error(`Unexpected HF embedding shape: ${JSON.stringify(result).slice(0, 120)}`);
 }
