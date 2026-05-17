@@ -34,7 +34,7 @@ export default function HirePage() {
     const body = encodeURIComponent(
       `Fit score: ${data.fitScore}/10\n\nStrengths:\n${data.strengths.map((s) => `• ${s}`).join("\n")}\n\nTailored bullets:\n${data.tailoredBullets.map((b) => `• ${b}`).join("\n")}\n\n${data.coverParagraph}`
     );
-    window.location.href = `mailto:claude@mindcres.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:udaykiranbattula304@gmail.com?subject=${subject}&body=${body}`;
   }
 
   return (

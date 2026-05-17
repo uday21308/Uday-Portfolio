@@ -3,6 +3,7 @@ import { fontVariables } from "@/lib/fonts";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { AIProvider } from "@/components/providers/AIProvider";
 import { Cursor } from "@/components/ui/Cursor";
+import { Nav } from "@/components/ui/Nav";
 import { UdayAI } from "@/components/ai/UdayAI";
 import { AutoGreet } from "@/components/ai/AutoGreet";
 import "./globals.css";
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LenisProvider>
           <AIProvider>
+            <Nav />
             {children}
             <UdayAI />
             <AutoGreet delayMs={8000} />

@@ -1,4 +1,3 @@
-import { Nav } from "@/components/ui/Nav";
 import { Grain } from "@/components/ui/Grain";
 import { Footer } from "@/components/ui/Footer";
 import { Hero } from "@/components/hero/Hero";
@@ -14,7 +13,6 @@ export default function Page() {
   return (
     <>
       <Grain />
-      <Nav />
       <main>
         <Hero />
         <About />

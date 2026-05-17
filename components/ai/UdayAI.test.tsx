@@ -15,13 +15,12 @@ describe("UdayAI", () => {
     fireEvent.click(screen.getByRole("button", { name: /open uday ai/i }));
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
-  it("renders all 4 mode chips when open", () => {
+  it("renders the 3 tool links in the header when open", () => {
     r();
     fireEvent.click(screen.getByRole("button", { name: /open uday ai/i }));
-    expect(screen.getByText(/Chat/i)).toBeInTheDocument();
-    expect(screen.getByText(/Hire/i)).toBeInTheDocument();
-    expect(screen.getByText(/Play/i)).toBeInTheDocument();
-    expect(screen.getByText(/Connect/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /tailored fit pitch/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /bug dodger/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /claude desktop/i })).toBeInTheDocument();
   });
   it("closes on Escape", () => {
     r();

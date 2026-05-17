@@ -1,12 +1,13 @@
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
+import { Target, Gamepad2, Plug, X } from "lucide-react";
 import { useAI } from "@/components/providers/AIProvider";
 import { ChatView } from "./ChatView";
-import { GameView } from "./GameView";
+import { MascotSprite } from "./MascotSprite";
 
 export function UdayAI() {
-  const { isOpen, open, close, mode, setMode } = useAI();
+  const { isOpen, open, close } = useAI();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -21,48 +22,73 @@ export function UdayAI() {
         type="button"
         aria-label="Open Uday AI"
         onClick={open}
-        className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/40 backdrop-blur-md shadow-lg hover:scale-105 transition-transform"
+        className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/40 backdrop-blur-md shadow-lg hover:scale-105 transition-transform flex items-center justify-center"
       >
-        <span aria-hidden className="block text-xl">🤖</span>
+        <MascotSprite scale={1.4} />
       </button>
     );
   }
 
   return (
-    <div role="dialog" aria-label="Uday AI" className="fixed inset-x-3 bottom-3 z-50 md:inset-auto md:bottom-5 md:right-5 md:w-[380px] md:h-[560px] flex flex-col bg-[var(--color-bg)]/95 backdrop-blur-xl border border-[var(--color-accent)]/30 rounded-2xl overflow-hidden shadow-2xl">
+    <div
+      role="dialog"
+      aria-label="Uday AI"
+      className="fixed inset-x-3 bottom-3 z-50 md:inset-auto md:bottom-5 md:right-5 md:w-[380px] md:h-[560px] flex flex-col bg-[var(--color-bg)]/95 backdrop-blur-xl border border-[var(--color-accent)]/30 rounded-2xl overflow-hidden shadow-2xl"
+    >
       <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--color-accent)]/15">
         <div className="flex items-center gap-2 text-sm font-semibold">
-          <span>🤖</span> Uday AI Twin
+          <MascotSprite />
+          <span>Uday AI Twin</span>
         </div>
-        <button onClick={close} aria-label="Close" className="text-sm opacity-60 hover:opacity-100">✕</button>
-      </div>
-      <div className="flex gap-1 px-3 py-2 border-b border-[var(--color-accent)]/10">
-        <ModeChip active={mode === "chat"} onClick={() => setMode("chat")}>💬 Chat</ModeChip>
-        <Link href="/hire" className="flex-1">
-          <ModeChip>🎯 Hire</ModeChip>
-        </Link>
-        <ModeChip active={mode === "game"} onClick={() => setMode("game")}>🎮 Play</ModeChip>
-        <Link href="/connect" className="flex-1">
-          <ModeChip>🔌 Connect</ModeChip>
-        </Link>
+        <div className="flex items-center gap-0.5">
+          <ToolLink href="/hire" onClick={close} title="Get a tailored fit pitch for a job description">
+            <Target size={12} strokeWidth={2} aria-hidden />
+            <span>Hire</span>
+          </ToolLink>
+          <ToolLink href="/play" onClick={close} title="Play Bug Dodger — a tiny arcade interlude">
+            <Gamepad2 size={12} strokeWidth={2} aria-hidden />
+            <span>Play</span>
+          </ToolLink>
+          <ToolLink href="/connect" onClick={close} title="Connect this portfolio to Claude Desktop via MCP">
+            <Plug size={12} strokeWidth={2} aria-hidden />
+            <span>MCP</span>
+          </ToolLink>
+          <button
+            onClick={close}
+            aria-label="Close"
+            className="ml-0.5 p-1.5 rounded-md text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-accent)]/10 transition-colors"
+          >
+            <X size={14} strokeWidth={2} aria-hidden />
+          </button>
+        </div>
       </div>
       <div className="flex-1 min-h-0">
-        {mode === "chat" ? <ChatView /> : <GameView />}
+        <ChatView />
       </div>
     </div>
   );
 }
 
-function ModeChip({ active, onClick, children }: { active?: boolean; onClick?: () => void; children: React.ReactNode }) {
+function ToolLink({
+  href,
+  onClick,
+  title,
+  children,
+}: {
+  href: string;
+  onClick?: () => void;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <button
+    <Link
+      href={href}
       onClick={onClick}
-      className={`flex-1 text-[11px] px-2 py-1 rounded-md border transition-colors
-        ${active
-          ? "border-[var(--color-accent-cyan)]/60 bg-[var(--color-accent-cyan)]/10 text-[var(--color-fg)]"
-          : "border-[var(--color-accent)]/15 text-[var(--color-fg-muted)] hover:border-[var(--color-accent)]/40"}`}
+      title={title}
+      aria-label={title}
+      className="flex items-center gap-1 px-1.5 py-1 rounded-md text-[10px] font-medium tracking-wide text-[var(--color-fg-muted)] hover:text-[var(--color-accent-cyan)] hover:bg-[var(--color-accent-cyan)]/10 transition-colors"
     >
       {children}
-    </button>
+    </Link>
   );
 }

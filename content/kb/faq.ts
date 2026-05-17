@@ -45,5 +45,5 @@ export const faq: FaqEntry[] = [
   { q: "Salary expectations?",
     a: "Open and happy to discuss with the hiring team — depends on the role, scope, and location." },
   { q: "Visa or work-authorization status?",
-    a: "Happy to discuss directly over email — claude@mindcres.com." },
+    a: "Happy to discuss directly over email — udaykiranbattula304@gmail.com." },
 ];
