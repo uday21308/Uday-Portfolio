@@ -16,7 +16,9 @@
 export const EMBED_DIM = 384;
 
 const MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2";
-const ENDPOINT = `https://api-inference.huggingface.co/pipeline/feature-extraction/${MODEL_ID}`;
+// HF deprecated the /pipeline/feature-extraction/{model} route — current
+// stable endpoint is /models/{model}. Same auth, similar body shape.
+const ENDPOINT = `https://api-inference.huggingface.co/models/${MODEL_ID}`;
 
 export async function embed(text: string): Promise<number[]> {
   const apiKey = process.env.HF_API_KEY;
@@ -34,8 +36,8 @@ export async function embed(text: string): Promise<number[]> {
     },
     body: JSON.stringify({
       inputs: text,
-      // Wait for model warm-up (cold loads can take 20-30s); without this
-      // HF returns 503 on first call after the model has been idle.
+      // wait_for_model avoids 503 on cold starts (initial load 20-30s);
+      // sentence-similarity tasks should return pooled vectors directly.
       options: { wait_for_model: true },
     }),
   });
@@ -45,14 +47,30 @@ export async function embed(text: string): Promise<number[]> {
     throw new Error(`HF Inference API failed: ${res.status} ${body.slice(0, 200)}`);
   }
 
-  // HF's feature-extraction pipeline returns either:
-  //   - number[]            (single text input, plain vector)
-  //   - number[][]          (batched or pooled outputs)
-  // We always send a single text, so we expect number[] of length EMBED_DIM.
-  const data = (await res.json()) as number[] | number[][];
-  if (Array.isArray(data[0])) {
-    // Shouldn't happen with our request shape, but normalize defensively.
+  // sentence-transformers models on the /models/ endpoint return either:
+  //   number[]                 — pooled + normalized sentence vector (preferred)
+  //   number[][]               — single-batch wrapper around the above
+  //   number[][][]             — token-level vectors needing mean-pool
+  const data = (await res.json()) as unknown;
+
+  if (Array.isArray(data) && typeof data[0] === "number") {
+    return data as number[];
+  }
+  if (Array.isArray(data) && Array.isArray(data[0]) && typeof (data[0] as unknown[])[0] === "number") {
     return data[0] as number[];
   }
-  return data as number[];
+  if (
+    Array.isArray(data) &&
+    Array.isArray(data[0]) &&
+    Array.isArray((data[0] as unknown[])[0])
+  ) {
+    // Token-level — mean-pool to a single vector
+    const tokens = data[0] as number[][];
+    const dim = tokens[0].length;
+    const vec = new Array<number>(dim).fill(0);
+    for (const t of tokens) for (let i = 0; i < dim; i++) vec[i] += t[i];
+    for (let i = 0; i < dim; i++) vec[i] /= tokens.length;
+    return vec;
+  }
+  throw new Error(`Unexpected HF response shape: ${JSON.stringify(data).slice(0, 120)}`);
 }
