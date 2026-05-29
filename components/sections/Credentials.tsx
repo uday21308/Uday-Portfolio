@@ -42,11 +42,13 @@ export function Credentials() {
   return (
     <section id="certifications" className="px-6 md:px-10 py-20 md:py-24">
       <div className="max-w-5xl mx-auto">
-        <p className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] opacity-80 mb-6 flex items-center gap-3">
-          <span className="block w-8 h-px bg-[var(--color-accent)]/40" />
-          Certifications
-          <span className="block flex-1 h-px bg-[var(--color-accent)]/10" />
-        </p>
+        <Reveal variant="mask">
+          <p className="font-[family-name:var(--font-mono)] text-[11px] tracking-[0.22em] uppercase text-[var(--color-accent)] opacity-80 mb-6 flex items-center gap-3">
+            <span className="block w-8 h-px bg-[var(--color-accent)]/40" />
+            Certifications
+            <span className="block flex-1 h-px bg-[var(--color-accent)]/10" />
+          </p>
+        </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-fr">
           {credentials.map((c, i) => {
@@ -69,6 +71,9 @@ export function Credentials() {
                     style={{ background: `radial-gradient(circle, ${a.bg} 0%, transparent 70%)`, backgroundColor: a.color, mixBlendMode: "screen", filter: "blur(40px)", opacity: 0.3 }}
                   />
 
+                  {/* diagonal glare sweep on hover */}
+                  <div aria-hidden className="cred-glare pointer-events-none absolute inset-0 overflow-hidden rounded-xl" />
+
                   {/* featured ribbon */}
                   {c.featured && (
                     <span
@@ -83,16 +88,20 @@ export function Credentials() {
                     </span>
                   )}
 
-                  {/* icon */}
+                  {/* icon + AirDrop pulse rings */}
                   <div
-                    className="relative flex items-center justify-center w-10 h-10 rounded-lg mb-4"
-                    style={{
-                      background: a.bg,
-                      color: a.color,
-                      border: `1px solid ${a.border}`,
-                    }}
+                    className="cred-icon-host relative w-10 h-10 mb-4"
+                    style={{ color: a.color }}
                   >
-                    <Icon size={18} strokeWidth={1.75} />
+                    <div
+                      className="relative z-10 flex items-center justify-center w-10 h-10 rounded-lg"
+                      style={{
+                        background: a.bg,
+                        border: `1px solid ${a.border}`,
+                      }}
+                    >
+                      <Icon size={18} strokeWidth={1.75} />
+                    </div>
                   </div>
 
                   {/* title */}
@@ -130,6 +139,57 @@ export function Credentials() {
         }
         #certifications article:hover {
           box-shadow: 0 12px 32px -8px rgba(0,0,0,.4), 0 0 24px -4px var(--accent-glow, rgba(245,224,170,0.25));
+        }
+
+        /* E: AirDrop pulse rings from icon (hover-only) */
+        .cred-icon-host::before,
+        .cred-icon-host::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 8px;
+          border: 1px solid currentColor;
+          opacity: 0;
+          pointer-events: none;
+          z-index: 1;
+        }
+        #certifications article:hover .cred-icon-host::before {
+          animation: cred-ring 3.2s ease-out infinite;
+        }
+        #certifications article:hover .cred-icon-host::after {
+          animation: cred-ring 3.2s ease-out infinite;
+          animation-delay: 1.6s;
+        }
+        @keyframes cred-ring {
+          0%   { transform: scale(1);   opacity: 0.55; }
+          80%  {                         opacity: 0.04; }
+          100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        /* D: diagonal light glare on hover */
+        .cred-glare { z-index: 4; }
+        .cred-glare::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(115deg,
+            transparent 0%, transparent 35%,
+            rgba(255,255,255,0.18) 47%,
+            rgba(255,255,255,0.32) 50%,
+            rgba(255,255,255,0.18) 53%,
+            transparent 65%, transparent 100%);
+          transform: translateX(-110%);
+          transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+        }
+        #certifications article:hover .cred-glare::before {
+          transform: translateX(110%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .cred-icon-host::before,
+          .cred-icon-host::after { animation: none; }
+          .cred-glare::before { transition: none; }
         }
       `}</style>
     </section>

@@ -169,7 +169,6 @@ export function HoloWorkstation() {
           background: linear-gradient(135deg, rgba(108,207,255,0.20) 0%, rgba(167,139,250,0.20) 100%);
           border: 1.5px solid rgba(108,207,255,0.7);
           border-radius: 7px;
-          backdrop-filter: blur(6px);
           box-shadow: 0 0 28px rgba(108,207,255,0.5), 0 0 60px rgba(108,207,255,0.2);
           padding: 10px 12px;
           font-family: var(--font-mono), monospace;
@@ -202,14 +201,14 @@ export function HoloWorkstation() {
         }
 
         .holo-panel {
-          background: rgba(245,224,170,0.05);
+          background: rgba(20, 22, 32, 0.55);
           border: 1px solid rgba(245,224,170,0.3);
           border-radius: 8px;
-          backdrop-filter: blur(12px);
           font-family: var(--font-mono), monospace;
           padding: 10px 12px;
           display: flex; flex-direction: column; gap: 5px;
           animation: holoFloat 4.5s ease-in-out infinite alternate;
+          will-change: transform;
           z-index: 3;
         }
         .holo-panel-h {

@@ -18,12 +18,6 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       smoothWheel: true,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
     lenis.on("scroll", ScrollTrigger.update);
 
     const ticker = (time: number) => lenis.raf(time * 1000);

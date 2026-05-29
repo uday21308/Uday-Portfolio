@@ -1,5 +1,6 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { AdaptiveDpr } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -37,9 +38,17 @@ function Particles() {
     const t = state.clock.elapsedTime;
     pointsRef.current.rotation.y = Math.sin(t * 0.05) * 0.15;
     pointsRef.current.rotation.x = Math.cos(t * 0.04) * 0.08;
-    // gentle parallax based on pointer
-    pointsRef.current.position.x = state.pointer.x * 0.4;
-    pointsRef.current.position.y = state.pointer.y * 0.2;
+    // Lerp parallax — decouples motion smoothness from mouse polling rate.
+    pointsRef.current.position.x = THREE.MathUtils.lerp(
+      pointsRef.current.position.x,
+      state.pointer.x * 0.4,
+      0.08
+    );
+    pointsRef.current.position.y = THREE.MathUtils.lerp(
+      pointsRef.current.position.y,
+      state.pointer.y * 0.2,
+      0.08
+    );
   });
 
   return (
@@ -74,9 +83,10 @@ export function NeuralField() {
     <Canvas
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 6], fov: 60 }}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
       style={{ position: "absolute", inset: 0 }}
     >
+      <AdaptiveDpr pixelated />
       <ambientLight intensity={0.3} />
       <Particles />
     </Canvas>
