@@ -1,0 +1,298 @@
+\documentclass[9pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=1.5 cm,
+    bottom=1.5 cm,
+    left=1.5 cm,
+    right=1.5 cm,
+    footskip=0.6 cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Uday Kiran Battula's CV},
+    pdfauthor={Uday Kiran Battula},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage[pscoord]{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.1cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{0.8pt}\titlerule]
+
+\titlespacing{\section}{-1pt}{0.10 cm}{0.10 cm}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.04 cm,
+        parsep=0.04 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 7pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.04 cm,
+        parsep=0.04 cm,
+        partopsep=0pt,
+        itemsep=1pt,
+        leftmargin=7pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{0 cm + 0.00001 cm}{0 cm + 0.00001 cm}
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.0 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.0 cm}
+    \begin{paracol}{2}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.1}
+}{
+    \par\kern\topsep
+}
+
+\let\hrefWithoutArrow\href
+
+\begin{document}
+
+\begin{header}
+    \fontsize{25 pt}{25 pt}\selectfont Uday Kiran Battula
+
+    \vspace{5 pt}
+
+    \normalsize
+    \mbox{udaykiranbattula304@gmail.com}%
+    \kern 5.0 pt%
+    $|$%
+    \kern 5.0 pt%
+    \mbox{(+91) 9392485042}%
+    \kern 5.0 pt%
+    $|$%
+    \kern 5.0 pt%
+    \mbox{\hrefWithoutArrow{https://linkedin.com/in/uday-kiran-22053b285}{linkedin.com/in/uday-kiran-22053b285}}%
+    \kern 5.0 pt%
+    $|$%
+    \kern 5.0 pt%
+    \mbox{\hrefWithoutArrow{https://github.com/uday21308}{github.com/uday21308}}%
+
+    \vspace{3 pt}
+
+    \small \textit{Featured --- Live portfolio at \hrefWithoutArrow{https://uday-kiran-battula.vercel.app}{uday-kiran-battula.vercel.app} with interactive AI Twin chat, JD matcher, and MCP server.}
+\end{header}
+
+\vspace{5 pt - 0.3 cm}
+
+\section{Summary}
+
+\begin{onecolentry}
+    AI/ML Engineer with $\sim$1 year building production Generative AI systems --- multilingual voice agents, agentic Retrieval-Augmented Generation (RAG) pipelines, and Model Context Protocol (MCP) servers. Stack: Python, FastAPI, LangChain, LangGraph, LiteLLM, Gemini/Claude/OpenAI, FAISS/ChromaDB, PostgreSQL, Redis, Docker, AWS. Shipped a 93.3\%-precision healthcare RAG pipeline and a 25-state voice grievance bot serving Andhra Pradesh state government.
+\end{onecolentry}
+
+\section{Skills}
+
+\begin{onecolentry}
+    \textbf{Languages:} Python, SQL, JavaScript, Java, Kotlin
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{Generative AI \& LLMs:} Google Gemini, OpenAI GPT, Anthropic Claude, Groq, LangChain, LangGraph, Google Agent Development Kit (ADK), LiteLLM, Hugging Face Transformers, Retrieval-Augmented Generation (RAG), Multi-Agent Workflows, Agentic AI Systems, Model Context Protocol (MCP), Prompt Engineering, Function Calling, Evals
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{ML/DL \& Vision:} PyTorch, TensorFlow, Keras, Scikit-learn, CNN, Transfer Learning, DenseNet, TensorFlow Lite, NLP
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{Retrieval \& Speech:} FAISS, ChromaDB, BM25, Sentence-Transformers, Gemini Embeddings, Sarvam AI (Telugu ASR/TTS), Exotel WebSocket
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{Backend \& MLOps:} FastAPI, REST APIs, Microservices, async/asyncpg, SQLAlchemy, Alembic, Pydantic, FastMCP, PostgreSQL, Redis, Docker, AWS, Dokku, Git, GitHub Actions (CI/CD), LLMOps (Langfuse, LangSmith), Pytest
+\end{onecolentry}
+
+\section{Experience}
+
+\begin{twocolentry}{Mar 2026 -- Present}
+    \textbf{Mindcres Technologies} \\
+    \textit{AI/ML Engineer}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Architecting the AP Government PGRS voice + web grievance bot --- a 25-state conversation state machine handling multilingual (Telugu/English) flows over Google Gemini, Sarvam AI Automatic Speech Recognition/Text-to-Speech (ASR/TTS), and Exotel WebSocket telephony.
+        \item Building a modular FastAPI backend (async, asyncpg) split into 4 microservices --- admin, bot, IVR, verification --- with provider-swap toolkit abstractions for LLM, OCR, Speech, and Audio, enabling zero-change vendor swaps.
+        \item Designing YAML-driven prompt management, scoped API-key + B2B widget-key auth with Redis rate limiting, and a federated admin log viewer.
+        \item Refactoring a 7{,}000+ line monolith while maintaining 2{,}300+ Pytest cases at 90\%+ coverage on Dokku, PostgreSQL, and Redis with Langfuse observability.
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{Sep 2025 -- Feb 2026}
+    \textbf{Spinnaker Analytics} (US-Based) \\
+    \textit{AI Engineer Intern}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Architected an 8-stage Retrieval-Augmented Generation (RAG) pipeline over 69 healthcare documents (345 chunks) using sentence-transformers + FAISS, hitting 93.3\% retrieval precision and 76\% validation rate with section re-ranking, token-overlap validation, and a 25\% confidence threshold for safety-first clinical decision support.
+        \item Designed an Equity Filings Agent with adapter-pattern loaders and lexicon-based scoring to automate 10-K/10-Q analysis --- structured reports in seconds vs hours of manual reading, with strict grounding prompts cutting false-positive validations by prioritizing precision over recall.
+        \item Built a Model Context Protocol (MCP) server using FastMCP over STDIO transport exposing 3 agentic tools with SQLite persistence and Claude Desktop integration, enabling protocol-level LLM-tool invocation from natural-language intent without hardcoded validation.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Projects}
+
+\begin{twocolentry}{}
+    \textbf{Code-Aware RAG Assistant for Codebase Intelligence} $|$ \textit{Python AST, FAISS, BM25, Reciprocal Rank Fusion, tiktoken, Groq Llama 3.1, LangSmith}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Architected a Multi-Index RAG system with 4 specialized FAISS indexes using Python's Abstract Syntax Tree (AST) module to extract functions, classes, and docstrings as atomic units, combined with a keyword-scoring query router classifying intent into 4 routes --- cutting irrelevant chunk retrieval by targeting only the relevant index per query type.
+        \item Engineered a hybrid retrieval pipeline combining FAISS semantic search, BM25, and Maximal Marginal Relevance (MMR) via Reciprocal Rank Fusion with a 1{,}500-token tiktoken budget, 3-variant query expansion, and Groq Llama 3.1, delivering answers in 2--3 seconds across any project folder with LangSmith observability tracing every pipeline stage.
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{}
+    \textbf{Real-Time E-Commerce Voice Bot} $|$ \textit{React, Web Speech API, ChromaDB, LangSmith}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Developed a full-stack voice assistant in React + Web Speech API for 4 intents (product search, order tracking, returns, recommendations) with a classification router and explicit tool execution preventing hallucinated order IDs and product names.
+        \item Architected a ChromaDB Retrieval-Augmented Generation (RAG) layer with metadata filtering on price and category over a 500-item, 30+ category inventory; LangSmith observability tracing every LLM call, retrieval, and tool invocation for audit and quality monitoring.
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{}
+    \textbf{Car Damage Detection \& Mobile Deployment} $|$ \textit{PyTorch, DenseNet-169, TensorFlow Lite, Kotlin, Android Studio}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Trained a 6-class vehicle-damage classifier (cracks, dents, scratches, glass shatter, flat tyres, lamp breakage) on a Kaggle dataset of $\sim$400 images per class, fine-tuning a pretrained DenseNet-169 backbone with a custom classifier head --- raising baseline CNN accuracy from 82\% to 95\% via data augmentation, hyperparameter tuning, and per-class confusion-matrix analysis.
+        \item Exported the trained model to TensorFlow Lite and shipped it inside a native Android app (Kotlin, Android Studio) for on-device offline inference, enabling field damage assessment for insurance-claim automation without server round-trips.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Certifications}
+
+\begin{twocolentry}{2026}
+    \textbf{Claude Code in Action} --- Anthropic Academy
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{twocolentry}{2025}
+    \textbf{Generative AI and Agentic AI Development} --- Boston Institute of Analytics
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{twocolentry}{2025}
+    \textbf{Introduction to Generative AI} --- Google Cloud Skills Boost
+\end{twocolentry}
+
+\vspace{0.10 cm}
+
+\begin{twocolentry}{2024}
+    \textbf{Machine Learning with Python} --- Infosys Springboard
+\end{twocolentry}
+
+\section{Education}
+
+\begin{twocolentry}{Aug 2021 -- May 2025}
+    \textbf{Amrita Vishwa Vidyapeetham} \\
+    \textit{B.Tech in Computer Science --- 7.57/10.0}
+\end{twocolentry}
+
+\end{document}
